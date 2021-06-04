@@ -1,0 +1,53 @@
+﻿@model List<SistemaVenda.Entities.Produto>;
+<html>
+<head>
+
+</head>
+<body>
+    <div class="The-title">
+        <h2>Produtos</h2>
+        <hr />
+    </div>
+    <div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th> Codigo</th>
+                    <th> Descrição</th>
+                    <th> Valor Unitario</th>
+                    <th>Quantidade</th>
+                    <th> Categoria</th>
+                </tr>
+            </thead>
+            <tbody> 
+                @foreach (var item in Model)
+                {
+                    <tr onclick="Editar(@item.Codigo)" style="cursor:pointer;">
+                        <td> @item.Codigo</td>
+                        <td> @item.Descricao</td>
+                        <td> @item.Valor</td>
+                        <td> @item.Quantidade</td>
+                        <td> @item.Categoria.Descricao</td>
+
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <br />
+        <button type="button" class="btn-block btn-primary" onclick="Cadastro()">
+            cadastrar produto
+        </button>
+    </div>
+    <script>
+        function Editar(Codigo) {
+            window.location = window.origin + "\\Produto\\Cadastro\\" + Codigo;
+
+        }
+        function Cadastro() {
+            window.location = window.origin + "\\Produto\\Cadastro";
+        }
+    </script>
+
+</body>
+</html>
