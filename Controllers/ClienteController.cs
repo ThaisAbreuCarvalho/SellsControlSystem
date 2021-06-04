@@ -12,9 +12,9 @@ namespace SistemaVenda.Controllers
 {
     public class ClienteController : Controller
     {
-        protected ApplicationDbContext mContext;
+        protected sistemavendasContext mContext;
 
-        public ClienteController(ApplicationDbContext context)
+        public ClienteController(sistemavendasContext context)
         {
             mContext = context;
         }
@@ -33,10 +33,10 @@ namespace SistemaVenda.Controllers
 
             if (Id != null)
             {
-                var entidade = mContext.Cliente.Where(x => x.Codigo == Id).FirstOrDefault();
+                Cliente entidade = mContext.Cliente.Where(x => x.Codigo == Id).FirstOrDefault();
                 viewModel.Codigo = entidade.Codigo;
                 viewModel.Nome = entidade.Nome;
-                viewModel.CNPJ_CPF = entidade.CNPJ_CPF;
+                viewModel.CNPJ_CPF = entidade.CnpjCpf;
                 viewModel.Email = entidade.Email;
                 viewModel.Celular = entidade.Celular;
 
@@ -51,9 +51,9 @@ namespace SistemaVenda.Controllers
             {
                 Cliente objCliente = new Cliente()
                 {
-                    Codigo = entidade.Codigo,
+                    Codigo = entidade.Codigo ?? 0,
                     Nome = entidade.Nome,
-                    CNPJ_CPF = entidade.CNPJ_CPF,
+                    CnpjCpf = entidade.CNPJ_CPF,
                     Email = entidade.Email,
                     Celular = entidade.Celular,
 

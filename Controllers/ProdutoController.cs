@@ -13,15 +13,15 @@ namespace SistemaVenda.Controllers
 {
     public class ProdutoController : Controller
     {
-        protected ApplicationDbContext mContext;
+        protected sistemavendasContext mContext;
 
-        public ProdutoController(ApplicationDbContext context)
+        public ProdutoController(sistemavendasContext context)
         {
             mContext = context;
         }
         public IActionResult Index()
         {
-            IEnumerable<Produto> Lista = mContext.Produto.Include(x => x.Categoria).ToList();
+            IEnumerable<Produto> Lista = mContext.Produto.Include(x => x.CodcategoriaNavigation).ToList();
 
             mContext.Dispose();
 
@@ -55,12 +55,12 @@ namespace SistemaVenda.Controllers
 
             if (Id != null)
             {
-                var entidade = mContext.Produto.Where(x => x.Codigo == Id).FirstOrDefault();
+                Produto entidade = mContext.Produto.Where(x => x.Codigo == Id).FirstOrDefault();
                 viewModel.Codigo = entidade.Codigo;
                 viewModel.Descricao = entidade.Descricao;
                 viewModel.Valor = entidade.Valor;
                 viewModel.Quantidade = entidade.Quantidade;
-                viewModel.CodigoCategoria = entidade.CodigoCategoria;
+                viewModel.CodigoCategoria = entidade.Codcategoria;
 
 
             }
@@ -73,11 +73,11 @@ namespace SistemaVenda.Controllers
             {
                 Produto objProduto = new Produto()
                 {
-                    Codigo = entidade.Codigo,
+                    Codigo = entidade.Codigo ?? 0,
                     Descricao = entidade.Descricao,
                     Valor = (decimal)entidade.Valor,
                     Quantidade = entidade.Quantidade,
-                    CodigoCategoria = (int)entidade.CodigoCategoria,
+                    Codcategoria = (int)entidade.CodigoCategoria,
 
                 };
                 if (entidade.Codigo == null)

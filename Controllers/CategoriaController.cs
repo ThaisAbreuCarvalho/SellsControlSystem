@@ -1,20 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SistemaVenda.DAL;
 using SistemaVenda.Entities;
 using SistemaVenda.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SistemaVenda.Controllers
 {
     public class CategoriaController : Controller
     {
-        protected ApplicationDbContext mContext;
+        protected DAL.sistemavendasContext mContext;
 
-        public CategoriaController(ApplicationDbContext context)
+        public CategoriaController(DAL.sistemavendasContext context)
         {
             mContext = context;
         }
@@ -47,7 +44,7 @@ namespace SistemaVenda.Controllers
             {
                 Categoria objCategoria = new Categoria()
                 {
-                    Codigo = entidade.Codigo,
+                    Codigo = entidade.Codigo ?? 0,
                     Descricao = entidade.Descricao
                 };
                 if (entidade.Codigo == null)

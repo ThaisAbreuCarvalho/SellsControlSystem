@@ -19,8 +19,8 @@ namespace SistemaVenda.Controllers
         //{
         //    _logger = logger;
         //}
-        protected ApplicationDbContext Repositorio;
-        public HomeController(ApplicationDbContext repositorio)
+        protected sistemavendasContext Repositorio;
+        public HomeController(sistemavendasContext repositorio)
         {
             Repositorio = repositorio;
         }

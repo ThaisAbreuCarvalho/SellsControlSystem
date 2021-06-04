@@ -14,9 +14,9 @@ namespace SistemaVenda.Controllers
 {
     public class VendaController : Controller
     {
-        protected ApplicationDbContext mContext;
+        protected sistemavendasContext mContext;
 
-        public VendaController(ApplicationDbContext context)
+        public VendaController(sistemavendasContext context)
         {
             mContext = context;
         }
@@ -76,10 +76,10 @@ namespace SistemaVenda.Controllers
 
             if (Id != null)
             {
-                var entidade = mContext.Venda.Where(x => x.Codigo == Id).FirstOrDefault();
+                Venda entidade = mContext.Venda.Where(x => x.Codigo == Id).FirstOrDefault();
                 viewModel.Codigo = entidade.Codigo;
                 viewModel.Data = entidade.Data;
-                viewModel.CodigoCliente = entidade.CodigoCliente;
+                viewModel.CodigoCliente = entidade.Codigo;
                 viewModel.Total = entidade.Total;
 
 
@@ -93,11 +93,11 @@ namespace SistemaVenda.Controllers
             {
                 Venda objVenda = new Venda()
                 {
-                    Codigo = entidade.Codigo,
+                    Codigo = entidade.Codigo ?? 0,
                     Data = (DateTime)entidade.Data,
-                    CodigoCliente = entidade.CodigoCliente,
+                    Codcliente = entidade.CodigoCliente,
                     Total = entidade.Total,
-                    Produtos = JsonConvert.DeserializeObject < ICollection<VendaProduto >> (entidade.JsonProdutos)
+                    Vendaproduto = JsonConvert.DeserializeObject <ICollection<Vendaproduto>> (entidade.JsonProdutos)
 
                 };
                 if (entidade.Codigo == null)

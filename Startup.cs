@@ -28,9 +28,9 @@ namespace SistemaVenda
         {
             services.AddControllersWithViews();
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer("Server=.;Database=Estoque;Trusted_Connection=True;MultipleActiveResultSets=true;"));
-
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //options.UseSqlServer("Server=.;Database=Estoque;Trusted_Connection=True;MultipleActiveResultSets=true;"));
+            services.AddScoped<sistemavendasContext>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSession();
         }
