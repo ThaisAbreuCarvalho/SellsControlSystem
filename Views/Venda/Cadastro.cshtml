@@ -1,1 +1,184 @@
-﻿
+﻿@model SistemaVenda.Models.VendaViewModel;
+
+@{
+    var disabled = (Model.Codigo == null) ? "disabled" : string.Empty;
+}
+<html>
+<head>
+    <title>Venda</title>
+    <meta charset="utf-8" />
+    <style>
+    </style>
+</head>
+<body>
+
+    <div class="The-title">
+        <h2>Vendas</h2>
+        <hr />
+    </div>
+    <div>
+        <form asp-controller="Venda" asp-action="Cadastro" method="post">
+            <input type="hidden" asp-for="Codigo" value="@Model.Codigo" />
+            <div class="form-group">
+                <div class="col-4">
+                    <label>Data</label>
+                    <input type="date" asp-for="Data" value="@Model.Data" class="form-control" />
+                    <span asp-validation-for="Data" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="col-4">
+                    <label>Cliente</label>
+                    <input type="hidden" asp-for="ListaClientes" value="@Model.ListaClientes" class="form-control" />
+                    <select asp-for="CodigoCliente" asp-items="@Model.ListaClientes" class="form-control" input-lg></select>
+                    <span asp-validation-for="CodigoCliente" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="col-4">
+                    <label>Produtos</label>
+                    <select id="cboProduto" onchange="BuscarPreco()" asp-items="@Model.ListaProdutos" class="form-control" input-lg></select>
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="col-2">
+                    <label> Preço Unitário</label>
+                    <input id="textPrecoUnitario" type="number" class="form-control" disabled />
+
+
+                </div>
+                <div class="col-2">
+                    <label> Quantidade</label>
+                    <input id="Qtde" type="number" class="form-control" onchange="CalcularSubtTotal()" />
+
+                </div>
+                <div class="col-2">
+                    <label>Sub Total</label>
+                    <input id="textsubtotal" type="number" class="form-control" disabled />
+
+                </div>
+                <div class="col-2">
+                    <br />
+                    <button type="button" class="btn btn-info" onclick="AddProduto()">Adicionar</button>
+                    <br />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-12">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr style="background:#f6f6f6">
+                                <td>Produto</td>
+                                <td>Preço Unitario</td>
+                                <td>Quantidade</td>
+                                <td>Todal</td>
+                            </tr>
+                        </thead>
+                        <tbody id="gridprodutos">
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="form-group">
+                <div>
+                    <div class="col-md-3">
+                        <label>Total da Venda</label>
+                        <input id="textTotal" asp-for="Total" type="text" class="form-control" value="@Model.Total" disabled />
+                        <span asp-validation-for="Total" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <input type="text" asp-for="JsonProdutos" id="textJsonProdutos" />
+            <br />
+            <div class="col">
+                <button type="button" class="btn btn-info" onclick="Novo()">
+                    Novo
+                </button>
+                <button type="submit" class="btn btn-success">
+                    Gravar
+                </button>
+                <button type="button" class="btn btn-warning" onclick="Listagem()">
+                    listagem
+                </button>
+                <button type="button" class="btn btn-danger" onclick="Excluir(@Model.Codigo)" @disabled>
+                    Excluir
+                </button>
+            </div>
+
+
+        </form>
+    </div>
+    <script>
+        var items = new Object;
+        items.Produtos = new Array;
+        var gridprodutos = document.getElementById("grid-produtos");
+        function AddProduto() {
+            var codigoproduto = document.getElementById("cboProduto").value;
+            var qtde = document.getElementById("Qtde").value;
+            var ValorUnitario = document.getElementById("textPrecoUnitario").value;
+            var subtotal = document.getElementById("textsubtotal").value;
+            items.Produtos.push({
+                "codigo": codigoproduto,
+                "Quantidade": qtde,
+                "Total": subtotal,
+                "Valorunitario": ValorUnitario
+            });
+            document.getElementById("textJsonProdutos").value = JSON.stringify(items.Produtos);
+
+            var linhagrid =
+                "<tr>" + 
+                "<td>" + ValorUnitario + "</td>" +
+                "<td>" + codigoproduto + "</td>" +
+                "<td>" + qtde + "</td>" +
+                "<td>" + subtotal + "</td>" +
+                "</tr>";
+
+            document.getElementById("gridprodutos").innerHTML += linhagrid;
+
+            var total = Number(document.getElementById("textTotal").value).toString().replace(",", ".") + Number(subtotal);
+
+            document.getElementById("textTotal") = total;
+
+            document.getElementById("cboProduto").value = "";
+            document.getElementById("Qtde").value = "";
+            document.getElementById("textPrecoUnitario").value = "";
+            document.getElementById("textsubtotal").selectedIndex = -1;
+        }
+        function BuscarPreco() {
+            var CodigoProduto = document.getElementById("cboProduto");
+            url = `/LerValorProduto/${CodigoProduto.value}`;
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == XMLHttpRequest.DONE) {
+
+                    document.getElementById("textPrecoUnitario").value = xhr.responseText;
+                }
+            }
+            xhr.open('GET', url, false);
+            xhr.send(null);
+        }
+        function CalcularSubtTotal() {
+            var PrecoUnitario = document.getElementById("textPrecoUnitario").value;
+            var Subtotal = PrecoUnitario * document.getElementById("Qtde").value;
+
+            document.getElementById("textsubtotal").value = Subtotal;
+        }
+        function Novo() {
+            Request("Cadastro");
+        }
+        function Listagem() {
+            Request("");
+        }
+        function Excluir(Codigo) {
+            Request("Excluir\\" + Codigo);
+        }
+        function Request(request) {
+            window.location = window.origin + "\\Venda\\" + request;
+        }
+    </script>
+</body>
+</html>

@@ -79,7 +79,7 @@ namespace SistemaVenda.Controllers
                 Venda entidade = mContext.Venda.Where(x => x.Codigo == Id).FirstOrDefault();
                 viewModel.Codigo = entidade.Codigo;
                 viewModel.Data = entidade.Data;
-                viewModel.CodigoCliente = entidade.Codigo;
+                viewModel.CodigoCliente = entidade.Codigo ?? 0;
                 viewModel.Total = entidade.Total;
 
 
@@ -97,7 +97,7 @@ namespace SistemaVenda.Controllers
                     Data = (DateTime)entidade.Data,
                     Codcliente = entidade.CodigoCliente,
                     Total = entidade.Total,
-                    Vendaproduto = JsonConvert.DeserializeObject <ICollection<Vendaproduto>> (entidade.JsonProdutos)
+                    Vendaproduto = JsonConvert.DeserializeObject<ICollection<Vendaproduto>>(entidade.JsonProdutos)
 
                 };
                 if (entidade.Codigo == null)
@@ -131,5 +131,12 @@ namespace SistemaVenda.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet("LerValorProduto/{CodigoProduto}")]
+        public decimal LerValorProduto(int CodigoProduto)
+        {
+            return mContext.Produto.Where(x => x.Codigo == CodigoProduto).Select(x => x.Valor).FirstOrDefault();
+        }
+
     }
 }
