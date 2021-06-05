@@ -5,6 +5,7 @@ namespace SistemaVenda.Entities
 {
     public partial class Vendaproduto
     {
+        public int codigo { get; set; }
         public float Quantidade { get; set; }
         public decimal Total { get; set; }
         public decimal Valorunitario { get; set; }
