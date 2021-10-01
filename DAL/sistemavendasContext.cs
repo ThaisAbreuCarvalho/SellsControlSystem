@@ -76,6 +76,7 @@ namespace SistemaVenda.DAL
 
                 entity.Property(e => e.Email)
                     .IsRequired()
+                    .HasColumnName("email")
                     .HasMaxLength(45)
                     .IsUnicode(false);
 
@@ -94,7 +95,7 @@ namespace SistemaVenda.DAL
                 entity.ToTable("produto");
 
                 entity.HasIndex(e => e.Codcategoria)
-                    .HasName("codcategori_idx");
+                    .HasName("Fkcodcategoria_idx");
 
                 entity.Property(e => e.Codigo)
                     .HasColumnName("codigo")
@@ -122,7 +123,7 @@ namespace SistemaVenda.DAL
                     .WithMany(p => p.Produto)
                     .HasForeignKey(d => d.Codcategoria)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("codcategori");
+                    .HasConstraintName("fk_codcategoria");
             });
 
             modelBuilder.Entity<Usuario>(entity =>
@@ -163,7 +164,7 @@ namespace SistemaVenda.DAL
                 entity.ToTable("venda");
 
                 entity.HasIndex(e => e.Codcliente)
-                    .HasName("fkclient_idx");
+                    .HasName("fkcodcliente_idx");
 
                 entity.Property(e => e.Codigo)
                     .HasColumnName("codigo")
@@ -183,48 +184,60 @@ namespace SistemaVenda.DAL
                     .WithMany(p => p.Venda)
                     .HasForeignKey(d => d.Codcliente)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fkclient");
+                    .HasConstraintName("fkcodcliente");
             });
 
             modelBuilder.Entity<Vendaproduto>(entity =>
             {
-                entity.HasKey(e => new { e.Codigovenda, e.Codigoproduto })
+                entity.HasKey(e => e.Codigo)
                     .HasName("PRIMARY");
 
                 entity.ToTable("vendaproduto");
 
                 entity.HasIndex(e => e.Codigoproduto)
-                    .HasName("fkcodproduto_idx");
+                    .HasName("fk_produto_idx");
 
-                entity.Property(e => e.Codigovenda)
-                    .HasColumnName("codigovenda")
+                entity.HasIndex(e => e.Codigovenda)
+                    .HasName("fk_vendas_idx");
+
+                entity.Property(e => e.Codigo)
+                    .HasColumnName("codigo")
                     .HasColumnType("int(11)");
 
                 entity.Property(e => e.Codigoproduto)
                     .HasColumnName("codigoproduto")
-                    .HasColumnType("int(11)");
+                    .HasColumnType("int(11)")
+                    .HasDefaultValueSql("'NULL'");
 
-                entity.Property(e => e.Quantidade).HasColumnName("quantidade");
+                entity.Property(e => e.Codigovenda)
+                    .HasColumnName("codigovenda")
+                    .HasColumnType("int(11)")
+                    .HasDefaultValueSql("'NULL'");
+
+                entity.Property(e => e.Quantidade)
+                    .HasColumnName("quantidade")
+                    .HasColumnType("int(11)")
+                    .HasDefaultValueSql("'NULL'");
 
                 entity.Property(e => e.Total)
                     .HasColumnName("total")
-                    .HasColumnType("decimal(9,2)");
+                    .HasColumnType("decimal(10,2)")
+                    .HasDefaultValueSql("'NULL'");
 
-                entity.Property(e => e.Valorunitario)
-                    .HasColumnName("valorunitario")
-                    .HasColumnType("decimal(9,2)");
+                entity.Property(e => e.Valor)
+                    .HasColumnName("valor")
+                    .HasColumnType("decimal(10,2)")
+                    .HasDefaultValueSql("'NULL'");
 
                 entity.HasOne(d => d.CodigoprodutoNavigation)
                     .WithMany(p => p.Vendaproduto)
                     .HasForeignKey(d => d.Codigoproduto)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fkcodproduto");
+                    .HasConstraintName("fk_produto");
 
                 entity.HasOne(d => d.CodigovendaNavigation)
                     .WithMany(p => p.Vendaproduto)
                     .HasForeignKey(d => d.Codigovenda)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fkcodvenda");
+                    .HasConstraintName("fk_vendas");
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -5,7 +5,7 @@
 </head>
 <body>
     <div class="The-title">
-        <h2>Venda</h2>
+        <h2>Vendas</h2>
         <hr />
     </div>
     <div>
@@ -16,8 +16,6 @@
                     <th> Data</th>
                     <th> Cliente</th>
                     <th> Total</th>
-
-
                 </tr>
             </thead>
             <tbody>
@@ -26,9 +24,8 @@
                 <tr onclick="Editar(@item.Codigo)" style="cursor:pointer;">
                     <td> @item.Codigo</td>
                     <td> @item.Data</td>
-                    <td> @item.CodclienteNavigation.Nome</td>
+                    <td> @item.Codcliente</td>
                     <td> @item.Total</td>
-
                 </tr>
                 }
             </tbody>

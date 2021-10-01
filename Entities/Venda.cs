@@ -10,7 +10,7 @@ namespace SistemaVenda.Entities
             Vendaproduto = new HashSet<Vendaproduto>();
         }
 
-        public int? Codigo { get; set; }
+        public int Codigo { get; set; }
         public DateTime Data { get; set; }
         public decimal Total { get; set; }
         public int Codcliente { get; set; }

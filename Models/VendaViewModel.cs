@@ -18,10 +18,11 @@ namespace SistemaVenda.Models
         [Required(ErrorMessage = "Informe o codigo do cliente")]
         public int CodigoCliente { get; set; }
 
+        public decimal Total { get; set; }
         public IEnumerable<SelectListItem> ListaClientes { get; set; }
         public IEnumerable<SelectListItem> ListaProdutos { get; set; }
 
         public string JsonProdutos { get; set; }
-        public decimal Total { get; set; }
+        
     }
 }

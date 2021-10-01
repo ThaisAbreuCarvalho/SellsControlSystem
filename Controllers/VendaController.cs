@@ -28,6 +28,7 @@ namespace SistemaVenda.Controllers
 
             return View(Lista);
         }
+
         private IEnumerable<SelectListItem> ListaProdutos()
         {
             List<SelectListItem> lista = new List<SelectListItem>();
@@ -47,6 +48,7 @@ namespace SistemaVenda.Controllers
             }
             return lista;
         }
+
         private IEnumerable<SelectListItem> ListaClientes()
         {
             List<SelectListItem> lista = new List<SelectListItem>();
@@ -66,6 +68,7 @@ namespace SistemaVenda.Controllers
             }
             return lista;
         }
+
         [HttpGet]
         public IActionResult Cadastro(int? Id)
         {
@@ -79,28 +82,29 @@ namespace SistemaVenda.Controllers
                 Venda entidade = mContext.Venda.Where(x => x.Codigo == Id).FirstOrDefault();
                 viewModel.Codigo = entidade.Codigo;
                 viewModel.Data = entidade.Data;
-                viewModel.CodigoCliente = entidade.Codigo ?? 0;
+                viewModel.CodigoCliente = entidade.Codcliente;
                 viewModel.Total = entidade.Total;
-
-
             }
+
             return View(viewModel);
         }
+
         [HttpPost]
         public IActionResult Cadastro(VendaViewModel entidade)
         {
             if (ModelState.IsValid)
             {
+               
                 Venda objVenda = new Venda()
                 {
-                    Codigo = entidade.Codigo ?? 0,
                     Data = (DateTime)entidade.Data,
-                    Codcliente = entidade.CodigoCliente,
                     Total = entidade.Total,
+                    Codcliente = entidade.CodigoCliente,
                     Vendaproduto = JsonConvert.DeserializeObject<ICollection<Vendaproduto>>(entidade.JsonProdutos)
-
                 };
-                if (entidade.Codigo == null)
+                
+
+                if (entidade.Codigo == null) 
                 {
                     mContext.Venda.Add(objVenda);
                 }
@@ -114,7 +118,6 @@ namespace SistemaVenda.Controllers
             {
                 entidade.ListaClientes = ListaClientes();
                 entidade.ListaProdutos = ListaProdutos();
-
                 return View(entidade);
             }
 
@@ -124,7 +127,7 @@ namespace SistemaVenda.Controllers
         [HttpGet]
         public IActionResult Excluir(int Id)
         {
-            var ent = new Produto() { Codigo = Id };
+            var ent = new Venda() { Codigo = Id };
             mContext.Attach(ent);
             mContext.Remove(ent);
             mContext.SaveChanges();
@@ -135,7 +138,7 @@ namespace SistemaVenda.Controllers
         [HttpGet("LerValorProduto/{CodigoProduto}")]
         public decimal LerValorProduto(int CodigoProduto)
         {
-            return mContext.Produto.Where(x => x.Codigo == CodigoProduto).Select(x => x.Valor).FirstOrDefault();
+            return mContext.Produto.Where(x => x.Codigo == CodigoProduto).Select(x=> x.Valor).FirstOrDefault();
         }
 
     }
