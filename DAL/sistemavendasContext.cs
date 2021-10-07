@@ -27,7 +27,7 @@ namespace SistemaVenda.DAL
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=;database=sistemavendas");
+                optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=96465771Th*;database=sistemavendas");
             }
         }
 
@@ -40,12 +40,9 @@ namespace SistemaVenda.DAL
 
                 entity.ToTable("categoria");
 
-                entity.Property(e => e.Codigo)
-                    .HasColumnName("codigo")
-                    .HasColumnType("int(11)");
+                entity.Property(e => e.Codigo).HasColumnName("codigo");
 
                 entity.Property(e => e.Descricao)
-                    .IsRequired()
                     .HasColumnName("descricao")
                     .HasMaxLength(45)
                     .IsUnicode(false);
@@ -58,30 +55,24 @@ namespace SistemaVenda.DAL
 
                 entity.ToTable("cliente");
 
-                entity.Property(e => e.Codigo)
-                    .HasColumnName("codigo")
-                    .HasColumnType("int(11)");
+                entity.Property(e => e.Codigo).HasColumnName("codigo");
 
                 entity.Property(e => e.Celular)
-                    .IsRequired()
                     .HasColumnName("celular")
                     .HasMaxLength(45)
                     .IsUnicode(false);
 
                 entity.Property(e => e.CnpjCpf)
-                    .IsRequired()
                     .HasColumnName("cnpj_cpf")
                     .HasMaxLength(45)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Email)
-                    .IsRequired()
                     .HasColumnName("email")
                     .HasMaxLength(45)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Nome)
-                    .IsRequired()
                     .HasColumnName("nome")
                     .HasMaxLength(45)
                     .IsUnicode(false);
@@ -97,23 +88,16 @@ namespace SistemaVenda.DAL
                 entity.HasIndex(e => e.Codcategoria)
                     .HasName("Fkcodcategoria_idx");
 
-                entity.Property(e => e.Codigo)
-                    .HasColumnName("codigo")
-                    .HasColumnType("int(11)");
+                entity.Property(e => e.Codigo).HasColumnName("codigo");
 
-                entity.Property(e => e.Codcategoria)
-                    .HasColumnName("codcategoria")
-                    .HasColumnType("int(11)");
+                entity.Property(e => e.Codcategoria).HasColumnName("codcategoria");
 
                 entity.Property(e => e.Descricao)
-                    .IsRequired()
                     .HasColumnName("descricao")
                     .HasMaxLength(45)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Quantidade)
-                    .HasColumnName("quantidade")
-                    .HasColumnType("int(11)");
+                entity.Property(e => e.Quantidade).HasColumnName("quantidade");
 
                 entity.Property(e => e.Valor)
                     .HasColumnName("valor")
@@ -122,8 +106,7 @@ namespace SistemaVenda.DAL
                 entity.HasOne(d => d.CodcategoriaNavigation)
                     .WithMany(p => p.Produto)
                     .HasForeignKey(d => d.Codcategoria)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_codcategoria");
+                    .HasConstraintName("Fkcodcategoria");
             });
 
             modelBuilder.Entity<Usuario>(entity =>
@@ -133,24 +116,19 @@ namespace SistemaVenda.DAL
 
                 entity.ToTable("usuario");
 
-                entity.Property(e => e.Codigo)
-                    .HasColumnName("codigo")
-                    .HasColumnType("int(11)");
+                entity.Property(e => e.Codigo).HasColumnName("codigo");
 
                 entity.Property(e => e.Email)
-                    .IsRequired()
                     .HasColumnName("email")
                     .HasMaxLength(45)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Nome)
-                    .IsRequired()
                     .HasColumnName("nome")
                     .HasMaxLength(45)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Senha)
-                    .IsRequired()
                     .HasColumnName("senha")
                     .HasMaxLength(45)
                     .IsUnicode(false);
@@ -166,13 +144,9 @@ namespace SistemaVenda.DAL
                 entity.HasIndex(e => e.Codcliente)
                     .HasName("fkcodcliente_idx");
 
-                entity.Property(e => e.Codigo)
-                    .HasColumnName("codigo")
-                    .HasColumnType("int(11)");
+                entity.Property(e => e.Codigo).HasColumnName("codigo");
 
-                entity.Property(e => e.Codcliente)
-                    .HasColumnName("codcliente")
-                    .HasColumnType("int(11)");
+                entity.Property(e => e.Codcliente).HasColumnName("codcliente");
 
                 entity.Property(e => e.Data).HasColumnName("data");
 
@@ -183,7 +157,6 @@ namespace SistemaVenda.DAL
                 entity.HasOne(d => d.CodclienteNavigation)
                     .WithMany(p => p.Venda)
                     .HasForeignKey(d => d.Codcliente)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fkcodcliente");
             });
 
@@ -200,34 +173,17 @@ namespace SistemaVenda.DAL
                 entity.HasIndex(e => e.Codigovenda)
                     .HasName("fk_vendas_idx");
 
-                entity.Property(e => e.Codigo)
-                    .HasColumnName("codigo")
-                    .HasColumnType("int(11)");
+                entity.Property(e => e.Codigo).HasColumnName("codigo");
 
-                entity.Property(e => e.Codigoproduto)
-                    .HasColumnName("codigoproduto")
-                    .HasColumnType("int(11)")
-                    .HasDefaultValueSql("'NULL'");
+                entity.Property(e => e.Codigoproduto).HasColumnName("codigoproduto");
 
-                entity.Property(e => e.Codigovenda)
-                    .HasColumnName("codigovenda")
-                    .HasColumnType("int(11)")
-                    .HasDefaultValueSql("'NULL'");
+                entity.Property(e => e.Codigovenda).HasColumnName("codigovenda");
 
-                entity.Property(e => e.Quantidade)
-                    .HasColumnName("quantidade")
-                    .HasColumnType("int(11)")
-                    .HasDefaultValueSql("'NULL'");
+                entity.Property(e => e.Quantidade).HasColumnName("quantidade");
 
                 entity.Property(e => e.Total)
                     .HasColumnName("total")
-                    .HasColumnType("decimal(10,2)")
-                    .HasDefaultValueSql("'NULL'");
-
-                entity.Property(e => e.Valor)
-                    .HasColumnName("valor")
-                    .HasColumnType("decimal(10,2)")
-                    .HasDefaultValueSql("'NULL'");
+                    .HasColumnType("decimal(10,2)");
 
                 entity.HasOne(d => d.CodigoprodutoNavigation)
                     .WithMany(p => p.Vendaproduto)

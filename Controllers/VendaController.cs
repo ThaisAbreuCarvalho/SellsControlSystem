@@ -102,7 +102,9 @@ namespace SistemaVenda.Controllers
                     Codcliente = entidade.CodigoCliente,
                     Vendaproduto = JsonConvert.DeserializeObject<ICollection<Vendaproduto>>(entidade.JsonProdutos)
                 };
-                
+
+                var price = objVenda.Vendaproduto.ToList();
+                objVenda.Total = price.Select(x=> x.Total).Sum();
 
                 if (entidade.Codigo == null) 
                 {
@@ -136,7 +138,7 @@ namespace SistemaVenda.Controllers
         }
 
         [HttpGet("LerValorProduto/{CodigoProduto}")]
-        public decimal LerValorProduto(int CodigoProduto)
+        public decimal? LerValorProduto(int CodigoProduto)
         {
             return mContext.Produto.Where(x => x.Codigo == CodigoProduto).Select(x=> x.Valor).FirstOrDefault();
         }

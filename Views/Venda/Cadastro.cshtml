@@ -84,7 +84,7 @@
         <div class="form-group">
             <div class="col-md-3">
                 <label>Total da Venda</label>
-                <input id="textTotal" class="for m-control" asp-for="Total" type="text" value="@Model.Total" disabled />
+                <input id="textTotal" class="form-control" asp-for="Total" type="number" value="@Model.Total" disabled />
                 <span asp-validation-for="Total" class="text-danger"></span>
             </div>
         </div>
@@ -116,7 +116,7 @@
             var ValorUnitario = document.getElementById("textPrecoUnitario").value;
             var subtotal = document.getElementById("textsubtotal").value;
             items.Produtos.push({
-                "codigo": codigoproduto,
+                "codigoproduto": codigoproduto,
                 "Quantidade": qtde,
                 "Total": subtotal,
                 "Valorunitario": ValorUnitario

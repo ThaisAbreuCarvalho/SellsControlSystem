@@ -11,9 +11,9 @@ namespace SistemaVenda.Entities
         }
 
         public int Codigo { get; set; }
-        public DateTime Data { get; set; }
-        public decimal Total { get; set; }
-        public int Codcliente { get; set; }
+        public int? Codcliente { get; set; }
+        public DateTime? Data { get; set; }
+        public decimal? Total { get; set; }
 
         public virtual Cliente CodclienteNavigation { get; set; }
         public virtual ICollection<Vendaproduto> Vendaproduto { get; set; }

@@ -10,7 +10,7 @@
     </div>
     <div>
         <table class="table table-bordered">
-            <thead> 
+            <thead>
                 <tr>
                     <th> Codigo</th>
                     <th> Data</th>
@@ -19,15 +19,19 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model)
+                @if (Model.Count() > 0)
                 {
-                <tr onclick="Editar(@item.Codigo)" style="cursor:pointer;">
-                    <td> @item.Codigo</td>
-                    <td> @item.Data</td>
-                    <td> @item.Codcliente</td>
-                    <td> @item.Total</td>
-                </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr onclick="Editar(@item.Codigo)" style="cursor:pointer;">
+                            <td> @item.Codigo</td>
+                            <td> @item.Data</td>
+                            <td> @item.Codcliente</td>
+                            <td> @item.Total</td>
+                        </tr>
+                    }
                 }
+
             </tbody>
         </table>
         <br />
