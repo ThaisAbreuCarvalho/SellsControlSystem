@@ -19,6 +19,7 @@ namespace SistemaVenda.Controllers
         {
             mContext = context;
         }
+
         public IActionResult Index()
         {
             IEnumerable<Produto> Lista = mContext.Produto.Include(x => x.CodcategoriaNavigation).ToList();
@@ -27,6 +28,7 @@ namespace SistemaVenda.Controllers
 
             return View(Lista);
         }
+
         private IEnumerable<SelectListItem> ListaCategoria()
         {
             List<SelectListItem> lista = new List<SelectListItem>();
@@ -46,6 +48,7 @@ namespace SistemaVenda.Controllers
             }
             return lista;
         }
+
         [HttpGet]
         public IActionResult Cadastro(int? Id)
         {
@@ -66,6 +69,7 @@ namespace SistemaVenda.Controllers
             }
             return View(viewModel);
         }
+
         [HttpPost]
         public IActionResult Cadastro(ProdutoViewModel entidade)
         {
