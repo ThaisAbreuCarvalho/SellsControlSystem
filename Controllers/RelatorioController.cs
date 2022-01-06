@@ -37,7 +37,7 @@ namespace SistemaVenda.Controllers
 
                 labelArray +=  "'" + Lista[i].Descricao.ToString() + "', ";
                 valuesArray +=  quantidade.ToString() + ", ";
-                coresArray += "'" + $"#{random.Next()}" + "', ";
+                coresArray += "'" + $"#{random.Next(0x10000000)}" + "', ";
             }
 
             ViewBag.values = valuesArray;

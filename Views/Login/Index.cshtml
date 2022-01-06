@@ -1,0 +1,51 @@
+﻿@{
+    Layout = null;
+}
+<html>
+<head>
+    <title>Login</title>
+    <meta charset="utf-8" />
+    <style>
+        .login-main {
+            background-color: #6bbf9a !important;
+            height: 50%;
+            width: 45%;
+            align-content: center;
+            text-align: center;
+            border-radius: 21px;
+            box-shadow: 0px 3px 11px 7px #979393;
+            margin: 10% 10% 10% 26%;
+            padding-bottom: 2%
+        }
+        img.image-login {
+            height: 55%;
+            margin-top: 3%;
+            margin-bottom: 3%;
+        }
+        .login-label {
+            font-size: 25px;
+            font-weight: bold;
+            padding-bottom: 2%
+        }
+    </style>
+</head>
+<body>
+    <div class="login-main">
+        <div>
+            <img class="image-login" src="~/img/login.png" alt="login"/>
+        </div>
+        <div class="login-boxes">
+            <div class="login-label">
+                <label >Login</label>
+                <br />
+                <input type="text" placeholder="pessoa@email.com" name="login" />
+            </div>
+            <div class="login-label">
+                <label >Senha</label>
+                <br />
+                <input type="password" name="senha" />
+            </div>
+        </div>
+    </div>
+</body>
+</html>
