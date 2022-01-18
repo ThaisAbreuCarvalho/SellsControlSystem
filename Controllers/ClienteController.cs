@@ -26,6 +26,7 @@ namespace SistemaVenda.Controllers
 
             return View(Lista);
         }
+
         [HttpGet]
         public IActionResult Cadastro(int? Id)
         {
@@ -44,6 +45,7 @@ namespace SistemaVenda.Controllers
             }
             return View(viewModel);
         }
+
         [HttpPost]
         public IActionResult Cadastro(ClienteViewModel entidade)
         {

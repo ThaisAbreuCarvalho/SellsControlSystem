@@ -1,51 +1,72 @@
 ﻿@{
     Layout = null;
 }
+@model SistemaVenda.Models.LoginViewModel;
 <html>
 <head>
     <title>Login</title>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/dist/mdb5/standard/compiled.min.css">
     <style>
-        .login-main {
-            background-color: #6bbf9a !important;
-            height: 50%;
-            width: 45%;
-            align-content: center;
-            text-align: center;
-            border-radius: 21px;
-            box-shadow: 0px 3px 11px 7px #979393;
-            margin: 10% 10% 10% 26%;
-            padding-bottom: 2%
+        .divider:after,
+        .divider:before {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #eee;
         }
-        img.image-login {
-            height: 55%;
-            margin-top: 3%;
-            margin-bottom: 3%;
+
+        .form-outline.mb-4.input-form input {
+            border: 1px solid black;
         }
-        .login-label {
+
+        .text-welcome {
             font-size: 25px;
-            font-weight: bold;
-            padding-bottom: 2%
         }
     </style>
 </head>
 <body>
-    <div class="login-main">
-        <div>
-            <img class="image-login" src="~/img/login.png" alt="login"/>
-        </div>
-        <div class="login-boxes">
-            <div class="login-label">
-                <label >Login</label>
-                <br />
-                <input type="text" placeholder="pessoa@email.com" name="login" />
+    <section class="vh-100">
+        <div class="container py-5 h-100">
+            <div class="row d-flex align-items-center justify-content-center h-100">
+                <div class="col-md-8 col-lg-7 col-xl-6">
+                    <img src="~/img/login.png" class="img-fluid" alt="login image">
+                </div>
+                <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+
+                    <div class="divider d-flex align-items-center my-4 text-welcome">
+                        <p class="text-center fw-bold mx-3 mb-0 text-muted">Seja bem vindo!</p>
+                    </div>
+                    <form  asp-controller="Login" asp-action="Index" method="post">
+                        <!-- Email input -->
+                        <div class="form-outline mb-4 input-form">
+                            <label class="form-label" for="form1Example13">Email</label>
+                            <input type="text" asp-for="Login" value="@Model.Login" class="form-control form-control-lg" />
+                            <span asp-validation-for="Login" class="text-danger"></span>
+                        </div>
+
+                        <!-- Password input -->
+                        <div class="form-outline mb-4 input-form">
+                            <span asp-validation-for="Senha" class="text-danger"></span>
+                            <input type="text" asp-for="Senha" value="@Model.Senha" class="form-control form-control-lg" />
+                            <label class="form-label" for="form1Example23">Senha</label>
+                        </div>
+
+                        <div class="d-flex justify-content-around align-items-center mb-4">
+                            <!-- Checkbox -->
+                            <span  class="text-danger"> @ViewData["ErrorLogin"]</span>
+                            <div class="form-check input-form">
+                                <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
+                                <label class="form-check-label" for="form1Example3"> Lembrar </label>
+                            </div>
+                        </div>
+
+                        <!-- Submit button -->
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Entrar</button>
+                    </form>
+                </div>
             </div>
-            <div class="login-label">
-                <label >Senha</label>
-                <br />
-                <input type="password" name="senha" />
-            </div>
         </div>
-    </div>
+    </section>
 </body>
 </html>

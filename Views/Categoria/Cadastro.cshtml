@@ -1,6 +1,6 @@
 ﻿@model SistemaVenda.Models.CategoriaViewModel;
 
-@{ 
+@{
     var disabled = (Model.Codigo == null) ? "disabled" : string.Empty;
 }
 <html>
@@ -23,8 +23,8 @@
                 <div class="col-4">
                     <label>Descrição</label>
                     <input type="text" asp-for="Descricao" value="@Model.Descricao" class="form-control" />
-                    <span asp-validation-for="Descricao" class="text-danger"
-></span>                </div>
+                    <span asp-validation-for="Descricao" class="text-danger"></span>
+                </div>
                 <br />
                 <div class="col">
                     <button type="button" class="btn btn-info" onclick="Novo()">
@@ -36,7 +36,7 @@
                     <button type="button" class="btn btn-warning" onclick="Listagem()">
                         listagem
                     </button>
-                    <button type="button" class="btn btn-danger" onclick="Excluir(@Model.Codigo)" @disabled >
+                    <button type="button" class="btn btn-danger" onclick="Excluir(@Model.Codigo)" @disabled>
                         Excluir
                     </button>
                 </div>
