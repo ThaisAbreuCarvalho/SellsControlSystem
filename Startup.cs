@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using SistemaVenda.Helpers;
 
 namespace SistemaVenda
 {
@@ -31,6 +32,7 @@ namespace SistemaVenda
             //services.AddDbContext<ApplicationDbContext>(options =>
             //options.UseSqlServer("Server=.;Database=Estoque;Trusted_Connection=True;MultipleActiveResultSets=true;"));
             services.AddScoped<sistemavendasContext>();
+            services.AddScoped<Cryptograph>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSession();
         }
