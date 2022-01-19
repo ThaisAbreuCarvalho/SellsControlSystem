@@ -29,8 +29,6 @@ namespace SistemaVenda
         {
             services.AddControllersWithViews();
 
-            //services.AddDbContext<ApplicationDbContext>(options =>
-            //options.UseSqlServer("Server=.;Database=Estoque;Trusted_Connection=True;MultipleActiveResultSets=true;"));
             services.AddScoped<sistemavendasContext>();
             services.AddScoped<Cryptograph>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -52,10 +50,10 @@ namespace SistemaVenda
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

@@ -1,14 +1,17 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
 using SistemaVenda.Entities;
 
 namespace SistemaVenda.DAL
 {
     public partial class sistemavendasContext : DbContext
     {
-        public sistemavendasContext()
+        private readonly IConfiguration _configuration;
+        public sistemavendasContext(IConfiguration configuration)
         {
+            _configuration = configuration;
         }
 
         public sistemavendasContext(DbContextOptions<sistemavendasContext> options)
@@ -27,7 +30,7 @@ namespace SistemaVenda.DAL
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=96465771Th*;database=sistemavendas");
+                optionsBuilder.UseMySQL(_configuration.GetConnectionString("dbContext")) ;
             }
         }
 

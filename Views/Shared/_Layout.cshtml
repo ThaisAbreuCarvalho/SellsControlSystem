@@ -1,4 +1,20 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor contextAcessor;
+
+@{
+    var UserName = string.Empty;
+    try
+    {
+        var login = bool.Parse(contextAcessor.HttpContext.Session.GetString(SistemaVenda.Helpers.Session.Logged));
+        UserName = contextAcessor.HttpContext.Session.GetString(SistemaVenda.Helpers.Session.UserName).ToString();
+    }
+    catch
+    {
+        contextAcessor.HttpContext.Response.Redirect("/Login");
+    }
+
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -28,6 +44,9 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
+                </div>
+                <div>
+                    Olá @UserName <a class="nav-link text-dark" href="~/Login/Index/0">  Sair</a>
                 </div>
             </div>
         </nav>
