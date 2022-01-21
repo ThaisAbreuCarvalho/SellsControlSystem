@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaVenda", "SistemaVenda.csproj", "{18F491F3-59B6-4FA5-9D7E-1168A846EE49}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SistemaVenda", "SistemaVenda.csproj", "{18F491F3-59B6-4FA5-9D7E-1168A846EE49}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{C3DEAD0C-A1BB-41BA-B467-7D2DED71A05C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{BB71E9B7-3A7B-4373-A6EA-8FCD96E41FFB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,6 +22,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{18F491F3-59B6-4FA5-9D7E-1168A846EE49} = {C3DEAD0C-A1BB-41BA-B467-7D2DED71A05C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4BAF2A51-5C6B-4C1D-B802-C57DC16517E2}

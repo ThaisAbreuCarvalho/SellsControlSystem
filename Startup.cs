@@ -31,7 +31,7 @@ namespace SistemaVenda
 
             services.AddScoped<sistemavendasContext>();
             services.AddScoped<Cryptograph>();
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddHttpContextAccessor();
             services.AddSession();
         }
 
