@@ -32,19 +32,16 @@ namespace Domain.Services
 
         public CategoriaViewModel Get(int? Id)
         {
-            var retorno = new CategoriaViewModel();
             if (!Id.HasValue)
-                return retorno;
+                return new CategoriaViewModel();
 
             var categories = _categoriaRepository.Select((int)Id);
 
-            retorno = new CategoriaViewModel
+            return new CategoriaViewModel
             {
                 Codigo = categories.Codigo,
                 Descricao = categories.Descricao
             };
-
-            return retorno;
         }
 
         public void Insert(CategoriaViewModel newCategory)

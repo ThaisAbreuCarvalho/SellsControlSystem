@@ -12,7 +12,7 @@ namespace Repository.Entities
         }
 
         [Key]
-        public int Codigo { get; set; }
+        public int? Codigo { get; set; }
         public string Celular { get; set; }
         public string CnpjCpf { get; set; }
         public string Email { get; set; }
