@@ -1,4 +1,4 @@
-﻿@model List<SistemaVenda.Entities.Cliente>;
+﻿@model List<Domain.Models.ClienteViewModel>;
 <html>
 <head>
     <title>Clientes</title>
@@ -26,7 +26,7 @@
                 <tr onclick="Editar(@item.Codigo)" style="cursor:pointer;">
                     <td> @item.Codigo</td>
                     <td> @item.Nome</td>
-                    <td> @item.CnpjCpf</td>
+                    <td> @item.CNPJ_CPF</td>
                     <td> @item.Email</td>
                     <td> @item.Celular</td>
 

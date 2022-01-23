@@ -33,12 +33,11 @@ namespace SistemaVenda
 
             //domain
             services.AddScoped<ICategoriaService, CategoriaService>();
+            services.AddScoped<IClienteService, ClienteService>();
 
             //repository
             services.AddScoped<ICategoriaRepository, CategoriaRepository>();
-
-            //abstraction
-
+            services.AddScoped<IClienteRepository, ClienteRepository>();
 
             services.AddSession();
         }
