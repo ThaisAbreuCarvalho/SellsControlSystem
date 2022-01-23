@@ -1,61 +1,47 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using SistemaVenda.Entities;
-using SistemaVenda.Models;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Domain.Models;
+using Domain.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SistemaVenda.Controllers
 {
     public class CategoriaController : Controller
     {
-        protected DAL.sistemavendasContext mContext;
-
-        public CategoriaController(DAL.sistemavendasContext context)
+        private readonly ICategoriaService _categoriaService;
+        public CategoriaController(ICategoriaService categoriaService)
         {
-            mContext = context;
+            _categoriaService = categoriaService;
         }
+
         public IActionResult Index()
         {
-            IEnumerable<Categoria> Lista = mContext.Categoria.ToList();
-
-            mContext.Dispose();
-
-            return View(Lista);
+            return View(_categoriaService.GetAll());
         }
+
         [HttpGet]
         public IActionResult Cadastro(int? Id)
         {
-            CategoriaViewModel viewModel = new CategoriaViewModel();
-
-            if(Id != null)
-            {
-                var entidade = mContext.Categoria.Where(x => x.Codigo == Id).FirstOrDefault();
-                viewModel.Codigo = entidade.Codigo;
-                viewModel.Descricao = entidade.Descricao;
-
-            }
-            return View(viewModel);
+            return View(_categoriaService.Get(Id));
         }
+
         [HttpPost]
         public IActionResult Cadastro(CategoriaViewModel entidade)
         {
             if (ModelState.IsValid)
             {
-                Categoria objCategoria = new Categoria()
-                {
-                    Codigo = entidade.Codigo ?? 0,
-                    Descricao = entidade.Descricao
-                };
-                if (entidade.Codigo == null)
-                {
-                    mContext.Categoria.Add(objCategoria);
-                }
-                else
-                {
-                    mContext.Entry(objCategoria).State = EntityState.Modified;
-                }
-                mContext.SaveChanges();
+                //Categoria objCategoria = new Categoria()
+                //{
+                //    Codigo = entidade.Codigo ?? 0,
+                //    Descricao = entidade.Descricao
+                //};
+                //if (entidade.Codigo == null)
+                //{
+                //    mContext.Categoria.Add(objCategoria);
+                //}
+                //else
+                //{
+                //    mContext.Entry(objCategoria).State = EntityState.Modified;
+                //}
+                //mContext.SaveChanges();
             }
             else
             {
@@ -68,10 +54,10 @@ namespace SistemaVenda.Controllers
         [HttpGet]
         public IActionResult Excluir (int Id)
         {
-            var ent = new Categoria() { Codigo = Id };
-            mContext.Attach(ent);
-            mContext.Remove(ent);
-            mContext.SaveChanges();
+            //var ent = new Categoria() { Codigo = Id };
+            //mContext.Attach(ent);
+            //mContext.Remove(ent);
+            //mContext.SaveChanges();
 
             return RedirectToAction("Index");
         }

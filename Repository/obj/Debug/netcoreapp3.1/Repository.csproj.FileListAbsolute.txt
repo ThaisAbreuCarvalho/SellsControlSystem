@@ -8,3 +8,6 @@ C:\Users\thais\Desktop\repos\SistemaDeControle de vendas\SistemaVenda\Repository
 C:\Users\thais\Desktop\repos\SistemaDeControle de vendas\SistemaVenda\Repository\obj\Debug\netcoreapp3.1\Repository.csproj.CoreCompileInputs.cache
 C:\Users\thais\Desktop\repos\SistemaDeControle de vendas\SistemaVenda\Repository\obj\Debug\netcoreapp3.1\Repository.dll
 C:\Users\thais\Desktop\repos\SistemaDeControle de vendas\SistemaVenda\Repository\obj\Debug\netcoreapp3.1\Repository.pdb
+C:\Users\thais\Desktop\repos\SistemaDeControle de vendas\SistemaVenda\Repository\bin\Debug\netcoreapp3.1\Repository.runtimeconfig.json
+C:\Users\thais\Desktop\repos\SistemaDeControle de vendas\SistemaVenda\Repository\bin\Debug\netcoreapp3.1\Repository.runtimeconfig.dev.json
+C:\Users\thais\Desktop\repos\SistemaDeControle de vendas\SistemaVenda\Repository\obj\Debug\netcoreapp3.1\Repository.genruntimeconfig.cache
