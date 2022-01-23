@@ -26,27 +26,7 @@ namespace SistemaVenda.Controllers
         [HttpPost]
         public IActionResult Cadastro(CategoriaViewModel entidade)
         {
-            if (ModelState.IsValid)
-            {
-                //Categoria objCategoria = new Categoria()
-                //{
-                //    Codigo = entidade.Codigo ?? 0,
-                //    Descricao = entidade.Descricao
-                //};
-                //if (entidade.Codigo == null)
-                //{
-                //    mContext.Categoria.Add(objCategoria);
-                //}
-                //else
-                //{
-                //    mContext.Entry(objCategoria).State = EntityState.Modified;
-                //}
-                //mContext.SaveChanges();
-            }
-            else
-            {
-                return View(entidade);
-            }
+            _categoriaService.Insert(entidade);
 
             return RedirectToAction("Index");
         }
@@ -54,10 +34,7 @@ namespace SistemaVenda.Controllers
         [HttpGet]
         public IActionResult Excluir (int Id)
         {
-            //var ent = new Categoria() { Codigo = Id };
-            //mContext.Attach(ent);
-            //mContext.Remove(ent);
-            //mContext.SaveChanges();
+            _categoriaService.Delete(Id);
 
             return RedirectToAction("Index");
         }

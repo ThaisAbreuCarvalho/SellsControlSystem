@@ -12,7 +12,7 @@ namespace Repository.Entities
         }
 
         [Key]
-        public int Codigo { get; set; }
+        public int? Codigo { get; set; }
         public string Descricao { get; set; }
 
         public virtual ICollection<Produto> Produto { get; set; }

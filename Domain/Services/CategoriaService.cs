@@ -1,5 +1,6 @@
 ﻿using Domain.Models;
 using Domain.Services.Interfaces;
+using Repository.Entities;
 using Repository.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace Domain.Services
         public List<CategoriaViewModel> GetAll()
         {
             var retorno = new List<CategoriaViewModel>();
-            var categories =  _categoriaRepository.Select(new Repository.Entities.Categoria { });
+            var categories = _categoriaRepository.Select(new Repository.Entities.Categoria { });
 
             categories.ForEach(x => retorno.Add(new CategoriaViewModel
             {
@@ -44,6 +45,20 @@ namespace Domain.Services
             };
 
             return retorno;
+        }
+
+        public void Insert(CategoriaViewModel newCategory)
+        {
+            _categoriaRepository.Insert(new Categoria
+            {
+                Codigo = null,
+                Descricao = newCategory.Descricao
+            });
+        }
+
+        public void Delete(int Id)
+        {
+            _categoriaRepository.Delete(Id);
         }
     }
 }

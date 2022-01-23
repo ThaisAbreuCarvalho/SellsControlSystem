@@ -8,5 +8,7 @@ namespace Domain.Services.Interfaces
     {
         List<CategoriaViewModel> GetAll();
         CategoriaViewModel Get(int? Id);
+        void Insert(CategoriaViewModel newCategory);
+        void Delete(int Id);
     }
 }
