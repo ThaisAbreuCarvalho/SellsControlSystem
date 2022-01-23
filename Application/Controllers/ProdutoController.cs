@@ -38,14 +38,14 @@ namespace SistemaVenda.Controllers
                 Value = string.Empty,
                 Text = string.Empty
             });
-            foreach( var item in mContext.Categoria.ToList())
-            {
-                lista.Add(new SelectListItem()
-                {
-                    Value = item.Codigo.ToString(),
-                    Text = item.Descricao.ToString()
-                });
-            }
+            //foreach( var item in mContext.Categoria.ToList())
+            //{
+            //    lista.Add(new SelectListItem()
+            //    {
+            //        Value = item.Codigo.ToString(),
+            //        Text = item.Descricao.ToString()
+            //    });
+            //}
             return lista;
         }
 

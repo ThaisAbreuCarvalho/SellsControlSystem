@@ -1,16 +1,13 @@
+using Domain.Services;
+using Domain.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Repository;
+using Repository.Interfaces;
 using SistemaVenda.DAL;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using SistemaVenda.Helpers;
 
 namespace SistemaVenda
@@ -29,9 +26,20 @@ namespace SistemaVenda
         {
             services.AddControllersWithViews();
 
-            services.AddScoped<sistemavendasContext>();
+            services.AddScoped<SistemaVenda.DAL.sistemavendasContext>();
+            services.AddScoped<Repository.Contexto.sistemavendasContext>();
             services.AddScoped<Cryptograph>();
             services.AddHttpContextAccessor();
+
+            //domain
+            services.AddScoped<ICategoriaService, CategoriaService>();
+
+            //repository
+            services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+
+            //abstraction
+
+
             services.AddSession();
         }
 

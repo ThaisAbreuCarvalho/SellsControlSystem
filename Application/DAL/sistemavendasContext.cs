@@ -19,7 +19,6 @@ namespace SistemaVenda.DAL
         {
         }
 
-        public virtual DbSet<Categoria> Categoria { get; set; }
         public virtual DbSet<Cliente> Cliente { get; set; }
         public virtual DbSet<Produto> Produto { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
