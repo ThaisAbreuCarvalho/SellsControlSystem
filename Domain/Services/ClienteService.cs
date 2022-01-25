@@ -34,12 +34,9 @@ namespace Domain.Services
             return result;
         }
 
-        public ClienteViewModel Get(int? Id)
+        public ClienteViewModel Get(int Id)
         {
-            if (!Id.HasValue)
-                return new ClienteViewModel(); ;
-
-            var cliente = _clienteRepository.Select((int)Id);
+            var cliente = _clienteRepository.Select(Id);
 
             return new ClienteViewModel
             {

@@ -1,4 +1,4 @@
-﻿@model List<SistemaVenda.Entities.Produto>;
+﻿@model List<Domain.Models.ProdutoViewModel>;
 <html>
 <head>
     <title>Produtos</title>
@@ -28,7 +28,7 @@
                         <td> @item.Descricao</td>
                         <td> @item.Valor</td>
                         <td> @item.Quantidade</td>
-                        <td> @item.CodcategoriaNavigation.Descricao</td>
+                        <td> @item.CategoriaDescricao</td>
 
 
                     </tr>

@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Domain.Services.Interfaces
 {
-    public interface IClienteService
+    public interface IProdutoService
     {
-        List<ClienteViewModel> GetAll();
-        ClienteViewModel Get(int Id);
-        void Insert(ClienteViewModel cliente);
+        List<ProdutoViewModel> GetAll();
+        ProdutoViewModel Get(int Id);
+        void Insert(ProdutoViewModel newProduct);
         void Delete(int Id);
     }
 }

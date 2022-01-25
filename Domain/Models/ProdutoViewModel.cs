@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
 
 namespace Domain.Models
 {
@@ -19,6 +19,7 @@ namespace Domain.Models
         [Required(ErrorMessage = "Informe a categoria do produto")]
 
         public int? CodigoCategoria { get; set; }
+        public string CategoriaDescricao { get; set; }
 
         public IEnumerable<SelectListItem> ListaCategorias { get; set; }
     }

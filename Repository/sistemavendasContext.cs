@@ -28,7 +28,7 @@ namespace Repository.Contexto
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySQL(_configuration.GetConnectionString("dbContext")) ;
+                optionsBuilder.UseMySQL(_configuration.GetConnectionString("dbContext"));
             }
         }
 
@@ -107,7 +107,8 @@ namespace Repository.Contexto
                 entity.HasOne(d => d.CodcategoriaNavigation)
                     .WithMany(p => p.Produto)
                     .HasForeignKey(d => d.Codcategoria)
-                    .HasConstraintName("Fkcodcategoria");
+                    .HasConstraintName("Fkcodcategoria")
+                    .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<Usuario>(entity =>
@@ -158,7 +159,8 @@ namespace Repository.Contexto
                 entity.HasOne(d => d.CodclienteNavigation)
                     .WithMany(p => p.Venda)
                     .HasForeignKey(d => d.Codcliente)
-                    .HasConstraintName("fkcodcliente");
+                    .HasConstraintName("fkcodcliente")
+                     .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<Vendaproduto>(entity =>
@@ -189,12 +191,14 @@ namespace Repository.Contexto
                 entity.HasOne(d => d.CodigoprodutoNavigation)
                     .WithMany(p => p.Vendaproduto)
                     .HasForeignKey(d => d.Codigoproduto)
-                    .HasConstraintName("fk_produto");
+                    .HasConstraintName("fk_produto")
+                    .OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasOne(d => d.CodigovendaNavigation)
                     .WithMany(p => p.Vendaproduto)
                     .HasForeignKey(d => d.Codigovenda)
-                    .HasConstraintName("fk_vendas");
+                    .HasConstraintName("fk_vendas")
+                    .OnDelete(DeleteBehavior.Cascade);
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -12,8 +12,8 @@ namespace Repository
     public abstract class Repository<TEntidade> : DbContext, IRepository<TEntidade>
         where TEntidade : class, new()
     {
-        DbSet<TEntidade> _DbContextSet;
-        DbContext _Db;
+        protected DbSet<TEntidade> _DbContextSet;
+        protected DbContext _Db;
 
         public Repository(DbContext dbContext)
         {
@@ -40,12 +40,12 @@ namespace Repository
             _Db.SaveChanges();
         }
 
-        public List<TEntidade> Select(TEntidade entity)
+        public virtual List<TEntidade> Select(TEntidade entity)
         {
             return _DbContextSet.AsNoTracking().ToList();
         }
 
-        public TEntidade Select(int Id)
+        public virtual TEntidade Select(int Id)
         {
             return _DbContextSet.Find(Id);
         }

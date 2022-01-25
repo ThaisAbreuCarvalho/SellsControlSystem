@@ -26,12 +26,18 @@ namespace SistemaVenda.Controllers
         [HttpGet]
         public IActionResult Cadastro(int? Id)
         {
-            return View(_clienteService.Get(Id));
+            if (!Id.HasValue)
+                return View(new ClienteViewModel());
+
+            return View(_clienteService.Get((int)Id));
         }
 
         [HttpPost]
         public IActionResult Cadastro(ClienteViewModel entidade)
         {
+            if (!ModelState.IsValid)
+                return View(entidade);
+
             _clienteService.Insert(entidade);
             return RedirectToAction("Index");
         }
