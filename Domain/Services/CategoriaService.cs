@@ -1,5 +1,6 @@
 ﻿using Domain.Models;
 using Domain.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Repository.Entities;
 using Repository.Interfaces;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace Domain.Services
     public class CategoriaService : ICategoriaService
     {
         private readonly ICategoriaRepository _categoriaRepository;
+
         public CategoriaService(ICategoriaRepository categoriaRepository)
         {
             _categoriaRepository = categoriaRepository;
@@ -19,7 +21,7 @@ namespace Domain.Services
         public List<CategoriaViewModel> GetAll()
         {
             var retorno = new List<CategoriaViewModel>();
-            var categories = _categoriaRepository.Select(new Repository.Entities.Categoria { });
+            var categories = _categoriaRepository.Select(new Categoria { });
 
             categories.ForEach(x => retorno.Add(new CategoriaViewModel
             {
@@ -30,12 +32,9 @@ namespace Domain.Services
             return retorno;
         }
 
-        public CategoriaViewModel Get(int? Id)
+        public CategoriaViewModel Get(int Id)
         {
-            if (!Id.HasValue)
-                return new CategoriaViewModel();
-
-            var categories = _categoriaRepository.Select((int)Id);
+            var categories = _categoriaRepository.Select(Id);
 
             return new CategoriaViewModel
             {
@@ -56,6 +55,21 @@ namespace Domain.Services
         public void Delete(int Id)
         {
             _categoriaRepository.Delete(Id);
+        }
+
+        public List<SelectListItem> ListaCategoria()
+        {
+            var categories = _categoriaRepository.Select(new Categoria { });
+            var result = new List<SelectListItem>();
+
+            categories.ForEach(x =>
+            result.Add(new SelectListItem()
+            {
+                Value = x.Codigo.ToString(),
+                Text = x.Descricao.ToString()
+            }));
+
+            return result;
         }
     }
 }

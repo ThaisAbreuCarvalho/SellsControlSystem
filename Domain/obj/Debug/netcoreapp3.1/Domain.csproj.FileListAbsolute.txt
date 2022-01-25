@@ -11,3 +11,6 @@ C:\Users\thais\Desktop\repos\SistemaDeControle de vendas\SistemaVenda\Domain\obj
 C:\Users\thais\Desktop\repos\SistemaDeControle de vendas\SistemaVenda\Domain\bin\Debug\netcoreapp3.1\Repository.dll
 C:\Users\thais\Desktop\repos\SistemaDeControle de vendas\SistemaVenda\Domain\bin\Debug\netcoreapp3.1\Repository.pdb
 C:\Users\thais\Desktop\repos\SistemaDeControle de vendas\SistemaVenda\Domain\obj\Debug\netcoreapp3.1\Domain.csproj.CopyComplete
+C:\Users\thais\Desktop\repos\SistemaDeControle de vendas\SistemaVenda\Domain\bin\Debug\netcoreapp3.1\Domain.runtimeconfig.json
+C:\Users\thais\Desktop\repos\SistemaDeControle de vendas\SistemaVenda\Domain\bin\Debug\netcoreapp3.1\Domain.runtimeconfig.dev.json
+C:\Users\thais\Desktop\repos\SistemaDeControle de vendas\SistemaVenda\Domain\obj\Debug\netcoreapp3.1\Domain.genruntimeconfig.cache

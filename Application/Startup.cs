@@ -34,10 +34,12 @@ namespace SistemaVenda
             //domain
             services.AddScoped<ICategoriaService, CategoriaService>();
             services.AddScoped<IClienteService, ClienteService>();
+            services.AddScoped<IProdutoService, ProdutoService>();
 
             //repository
             services.AddScoped<ICategoriaRepository, CategoriaRepository>();
             services.AddScoped<IClienteRepository, ClienteRepository>();
+            services.AddScoped<IProdutoRepository, ProdutoRepository>();
 
             services.AddSession();
         }
