@@ -37,6 +37,7 @@ namespace SistemaVenda.Controllers
                 var viewModel = new VendaViewModel();
                 viewModel.ListaClientes = _clienteService.ListaClientes();
                 viewModel.ListaProdutos = _produtoService.ListaProdutos();
+                return View(viewModel);
             }
 
             return View(_vendaService.Get((int)Id));
