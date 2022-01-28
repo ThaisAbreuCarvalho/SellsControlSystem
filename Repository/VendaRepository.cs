@@ -22,7 +22,7 @@ namespace Repository
 
         public override Venda Select(int Id)
         {
-            return _DbContextSet.Include(x => x.CodclienteNavigation).AsNoTracking().FirstOrDefault();
+            return _DbContextSet.Include(x => x.CodclienteNavigation).Include(x => x.Vendaproduto).AsNoTracking().FirstOrDefault();
         }
     }
 }

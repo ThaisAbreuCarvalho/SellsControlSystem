@@ -21,6 +21,7 @@ namespace Domain.Models
         public IEnumerable<SelectListItem> ListaClientes { get; set; }
         public IEnumerable<SelectListItem> ListaProdutos { get; set; }
 
+        public List<ProdutoViewModel> vendas { get; set; }
         public string JsonProdutos { get; set; }
         
     }

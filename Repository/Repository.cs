@@ -21,7 +21,7 @@ namespace Repository
             _DbContextSet = _Db.Set<TEntidade>();
         }
 
-        public void Delete(int Id)
+        public virtual void Delete(int Id)
         {
             var entity = Select(Id);
             _DbContextSet.Remove(entity);

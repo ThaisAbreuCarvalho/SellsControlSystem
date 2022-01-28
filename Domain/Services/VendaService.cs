@@ -57,8 +57,16 @@ namespace Domain.Services
                 ListaClientes = clientes,
                 ListaProdutos = produtos,
                 Total = venda.Total,
-                NomeCliente = venda.CodclienteNavigation?.Nome
+                NomeCliente = venda.CodclienteNavigation?.Nome,
+                vendas = new List<ProdutoViewModel>()
             };
+
+            venda.Vendaproduto.ToList().ForEach(x => result.vendas.Add(new ProdutoViewModel
+            {
+                Codigo = x.Codigoproduto,
+                 Quantidade = x.Quantidade,
+                  Valor = x.Total
+            }));
 
             return result;
         }
@@ -68,11 +76,14 @@ namespace Domain.Services
             var venda = new Venda
             {
                 Data = (DateTime)newVenda.Data,
-                Total = newVenda.Total,
                 Codcliente = newVenda.CodigoCliente,
             };
 
             venda.Vendaproduto = JsonConvert.DeserializeObject<ICollection<Vendaproduto>>(newVenda.JsonProdutos);
+
+            var total = venda.Vendaproduto.Sum(x=> x.Total);
+            venda.Total = total;
+
             _vendaRepository.Insert(venda);
         }
 
