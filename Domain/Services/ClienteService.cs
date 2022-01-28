@@ -1,5 +1,6 @@
 ﻿using Domain.Models;
 using Domain.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Repository.Entities;
 using Repository.Interfaces;
 using System;
@@ -63,6 +64,21 @@ namespace Domain.Services
         public void Delete(int Id)
         {
             _clienteRepository.Delete(Id);
+        }
+
+        public List<SelectListItem> ListaClientes()
+        {
+            var categories = _clienteRepository.Select(new Cliente { });
+            var result = new List<SelectListItem>();
+
+            categories.ForEach(x =>
+            result.Add(new SelectListItem()
+            {
+                Value = x.Codigo.ToString(),
+                Text = x.Nome.ToString()
+            }));
+
+            return result;
         }
     }
 }

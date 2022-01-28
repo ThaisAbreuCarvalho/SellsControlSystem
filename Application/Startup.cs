@@ -35,11 +35,13 @@ namespace SistemaVenda
             services.AddScoped<ICategoriaService, CategoriaService>();
             services.AddScoped<IClienteService, ClienteService>();
             services.AddScoped<IProdutoService, ProdutoService>();
+            services.AddScoped<IVendaService, VendaService>();
 
             //repository
             services.AddScoped<ICategoriaRepository, CategoriaRepository>();
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
+            services.AddScoped<IVendaRepository, VendaRepository>();
 
             services.AddSession();
         }

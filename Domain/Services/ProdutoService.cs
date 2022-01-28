@@ -12,6 +12,7 @@ namespace Domain.Services
     {
         private readonly IProdutoRepository _produtoRepository;
         private readonly ICategoriaService _categoriaService;
+
         public ProdutoService(IProdutoRepository produtoRepository, ICategoriaService categoriaService)
         {
             _produtoRepository = produtoRepository;
@@ -75,6 +76,21 @@ namespace Domain.Services
         public void Delete(int Id)
         {
             _produtoRepository.Delete(Id);
+        }
+
+        public List<SelectListItem> ListaProdutos()
+        {
+            var categories = _produtoRepository.Select(new Produto { });
+            var result = new List<SelectListItem>();
+
+            categories.ForEach(x =>
+            result.Add(new SelectListItem()
+            {
+                Value = x.Codigo.ToString(),
+                Text = x.Descricao.ToString()
+            }));
+
+            return result;
         }
     }
 }

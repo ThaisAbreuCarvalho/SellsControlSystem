@@ -22,7 +22,8 @@ namespace Repository
 
         public override Produto Select(int Id)
         {
-            return _DbContextSet.Include(x => x.CodcategoriaNavigation).AsNoTracking().FirstOrDefault();
+            var products = Select(new Produto { });
+            return products.Find(x=> x.Codigo == Id);
         }
     }
 }

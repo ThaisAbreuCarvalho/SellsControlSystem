@@ -1,4 +1,4 @@
-﻿@model List<SistemaVenda.Entities.Venda>;
+﻿@model List<Domain.Models.VendaViewModel>;
 <html>
 <head>
 
@@ -25,8 +25,8 @@
                     {
                         <tr onclick="Editar(@item.Codigo)" style="cursor:pointer;">
                             <td> @item.Codigo</td>
-                            <td> @item.Data</td>
-                            <td> @item.Codcliente</td>
+                            <td> @Convert.ToDateTime(item.Data).ToShortDateString()</td>
+                            <td> @(item.NomeCliente != null ? item.NomeCliente : "não cadastrado")</td>
                             <td> @item.Total</td>
                         </tr>
                     }

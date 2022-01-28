@@ -1,4 +1,4 @@
-﻿@model SistemaVenda.Models.VendaViewModel;
+﻿@model Domain.Models.VendaViewModel;
 
 @{
     var disabled = (Model.Codigo == null) ? "disabled" : string.Empty;
@@ -21,8 +21,16 @@
         <div class="form-group">
             <div class="col-4">
                 <label>Data</label>
-                <input type="date" asp-for="Data" value="@Model.Data" class="form-control" />
-                <span asp-validation-for="Data" class="text-danger"></span>
+
+                @if (Model.Codigo != null)
+                {
+                    <input type="text" asp-for="Data" value="@Model.Data.Value.ToShortDateString()" class="form-control" disabled />
+                }
+                else
+                {
+                    <input type="date" asp-for="Data" value="@Model.Data" class="form-control" />
+                    <span asp-validation-for="Data" class="text-danger"></span>
+                }
             </div>
         </div>
         <br />
@@ -35,36 +43,39 @@
             </div>
         </div>
         <br />
-        <div class="form-group">
-            <div class="col-4">
-                <label>Produtos</label>
-                <select id="cboProduto" onchange="BuscarPreco()" asp-items="@Model.ListaProdutos" class="form-control" input-lg></select>
+        @if (Model.Codigo == null)
+        {
+            <div class="form-group">
+                <div class="col-4">
+                    <label>Produtos</label>
+                    <select id="cboProduto" onchange="BuscarPreco()" asp-items="@Model.ListaProdutos" class="form-control" input-lg></select>
+                </div>
             </div>
-        </div>
-        <br />
-        <div class="form-group">
-            <div class="col-2">
-                <label> Preço Unitário</label>
-                <input id="textPrecoUnitario" type="number" class="form-control" disabled />
+            <br />
+            <div class="form-group">
+                <div class="col-2">
+                    <label> Preço Unitário</label>
+                    <input id="textPrecoUnitario" type="number" class="form-control" disabled />
 
 
-            </div>
-            <div class="col-2">
-                <label> Quantidade</label>
-                <input id="Qtde" type="number" class="form-control" onchange="CalcularSubtTotal()" />
+                </div>
+                <div class="col-2">
+                    <label> Quantidade</label>
+                    <input id="Qtde" type="number" class="form-control" onchange="CalcularSubtTotal()" />
 
-            </div>
-            <div class="col-2">
-                <label>Sub Total</label>
-                <input id="textsubtotal" type="number" class="form-control" disabled />
+                </div>
+                <div class="col-2">
+                    <label>Sub Total</label>
+                    <input id="textsubtotal" type="number" class="form-control" disabled />
 
+                </div>
+                <div class="col-2">
+                    <br />
+                    <button type="button" class="btn btn-info" onclick="AddProduto()">Adicionar</button>
+                    <br />
+                </div>
             </div>
-            <div class="col-2">
-                <br />
-                <button type="button" class="btn btn-info" onclick="AddProduto()">Adicionar</button>
-                <br />
-            </div>
-        </div>
+        }
         <div class="form-group">
             <div class="col-12">
                 <table class="table table-bordered">
@@ -73,10 +84,23 @@
                             <td>Produto</td>
                             <td>Preço Unitario</td>
                             <td>Quantidade</td>
-                            <td>Todal</td>
+                            <td>ToTal</td>
                         </tr>
                     </thead>
                     <tbody id="gridprodutos">
+
+                        @if (Model.Codigo != null)
+                        {
+                            foreach (var item in Model.vendas)
+                            {
+                                <tr>
+                                    <td> @item.Codigo</td>
+                                    <td> @(item.Valor / item.Quantidade)</td>
+                                    <td> @item.Quantidade</td>
+                                    <td> @item.Valor</td>
+                                </tr>
+                            }
+                        }
                     </tbody>
                 </table>
             </div>
@@ -84,8 +108,15 @@
         <div class="form-group">
             <div class="col-md-3">
                 <label>Total da Venda</label>
-                <input id="textTotal" class="form-control" asp-for="Total" type="number" value="@Model.Total" disabled />
-                <span asp-validation-for="Total" class="text-danger"></span>
+                @if (Model.Codigo != null)
+                {
+                    <input id="textTotal" class="form-control"  type="text" value="@Model.vendas.Sum(x=> x.Valor)" disabled />
+                }
+                else
+                {
+                    <input id="textTotal" class="form-control" asp-for="Total" type="number" value="@Model.Total" disabled />
+                    <span asp-validation-for="Total" class="text-danger"></span>
+                }
             </div>
         </div>
         <input type="text" asp-for="JsonProdutos" id="textJsonProdutos" style="display:none;" />
@@ -125,8 +156,8 @@
 
             var linhagrid =
                 "<tr>" +
-                "<td>" + ValorUnitario + "</td>" +
                 "<td>" + codigoproduto + "</td>" +
+                "<td>" + ValorUnitario + "</td>" +
                 "<td>" + qtde + "</td>" +
                 "<td>" + subtotal + "</td>" +
                 "</tr>";
