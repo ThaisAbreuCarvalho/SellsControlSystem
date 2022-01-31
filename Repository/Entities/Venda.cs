@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Repository.Entities
 {
@@ -13,6 +14,7 @@ namespace Repository.Entities
 
         [Key]
         public int Codigo { get; set; }
+        [ForeignKey("codcliente")]
         public int? Codcliente { get; set; }
         public DateTime? Data { get; set; }
         public decimal? Total { get; set; }
