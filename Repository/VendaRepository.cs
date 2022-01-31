@@ -17,12 +17,13 @@ namespace Repository
 
         public override List<Venda> Select(Venda entity)
         {
-            return _DbContextSet.Include(x => x.CodclienteNavigation).AsNoTracking().ToList();
+            return _DbContextSet.Include(x => x.CodclienteNavigation).Include(x => x.Vendaproduto).AsNoTracking().ToList();
         }
 
         public override Venda Select(int Id)
         {
-            return _DbContextSet.Include(x => x.CodclienteNavigation).Include(x => x.Vendaproduto).AsNoTracking().FirstOrDefault();
+            var vendas = Select(new Venda { });
+            return vendas.Find(x => x.Codigo == Id);
         }
     }
 }

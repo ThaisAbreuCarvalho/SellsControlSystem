@@ -65,7 +65,8 @@ namespace Domain.Services
             {
                 Codigo = x.Codigoproduto,
                  Quantidade = x.Quantidade,
-                  Valor = x.Total
+                  Valor = x.Total,
+                   Descricao = produtos.Find(y => y.Value == x.Codigoproduto.ToString()).Text
             }));
 
             return result;
