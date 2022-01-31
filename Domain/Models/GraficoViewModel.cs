@@ -9,5 +9,6 @@ namespace Domain.Models
     {
         public string values { get; set; }
         public string labels { get; set; }
+        public string colors { get; set; }
     }
 }

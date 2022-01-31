@@ -22,7 +22,7 @@ namespace Repository.Contexto
         public virtual DbSet<Produto> Produto { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Venda> Venda { get; set; }
-        public virtual DbSet<Vendaproduto> Vendaproduto { get; set; }
+        public virtual DbSet<VendaProduto> Vendaproduto { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -163,7 +163,7 @@ namespace Repository.Contexto
                      .OnDelete(DeleteBehavior.Cascade);
             });
 
-            modelBuilder.Entity<Vendaproduto>(entity =>
+            modelBuilder.Entity<VendaProduto>(entity =>
             {
                 entity.HasKey(e => e.Codigo)
                     .HasName("PRIMARY");

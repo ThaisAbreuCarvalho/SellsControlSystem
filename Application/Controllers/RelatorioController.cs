@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using SistemaVenda.DAL;
-using SistemaVenda.Entities;
-using SistemaVenda.Models;
+﻿using Domain.Models;
+using Domain.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,37 +11,19 @@ namespace SistemaVenda.Controllers
 {
     public class RelatorioController : Controller
     {
-        protected sistemavendasContext mContext;
-
-        public RelatorioController(sistemavendasContext context)
+        private readonly IVendaService _vendaService;
+        public RelatorioController( IVendaService vendaService)
         {
-            mContext = context;
+            _vendaService = vendaService;
         }
 
         public IActionResult Grafico()
         {
-            List<Produto> Lista = mContext.Produto.ToList();
-            List<Vendaproduto> ListaVenda = mContext.Vendaproduto.ToList();
-            mContext.Dispose();
+            var data = _vendaService.GraphData();
 
-            string labelArray = string.Empty;
-            string valuesArray = string.Empty;
-            string coresArray = string.Empty;
-            var random = new Random();
-
-            for(int i=0; i< Lista.Count(); i++)
-            {
-                var itemVenda = ListaVenda.Where(x => x.Codigoproduto == Lista[i].Codigo).ToList();
-                var quantidade = itemVenda.Sum(x => x.Quantidade);
-
-                labelArray +=  "'" + Lista[i].Descricao.ToString() + "', ";
-                valuesArray +=  quantidade.ToString() + ", ";
-                coresArray += "'" + $"#{random.Next(0x10000000)}" + "', ";
-            }
-
-            ViewBag.values = valuesArray;
-            ViewBag.labels = labelArray;
-            ViewBag.cores = coresArray;
+            ViewBag.values = data.values;
+            ViewBag.labels = data.labels;
+            ViewBag.cores = data.colors;
 
             return View();
         }

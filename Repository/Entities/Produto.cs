@@ -9,7 +9,7 @@ namespace Repository.Entities
     {
         public Produto()
         {
-            Vendaproduto = new HashSet<Vendaproduto>();
+            Vendaproduto = new HashSet<VendaProduto>();
         }
 
         [Key]
@@ -21,6 +21,6 @@ namespace Repository.Entities
         public decimal? Valor { get; set; }
 
         public virtual Categoria CodcategoriaNavigation { get; set; }
-        public virtual ICollection<Vendaproduto> Vendaproduto { get; set; }
+        public virtual ICollection<VendaProduto> Vendaproduto { get; set; }
     }
 }
