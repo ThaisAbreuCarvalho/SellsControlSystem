@@ -42,6 +42,7 @@ namespace SistemaVenda
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
             services.AddScoped<IVendaRepository, VendaRepository>();
+            services.AddScoped<IVendaProdutoRepository, VendaProdutoRepository>();
 
             services.AddSession();
         }

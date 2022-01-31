@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Repository.Entities
 {
-    public partial class Vendaproduto
+    public partial class VendaProduto
     {
         [Key]
         public int? Codigo { get; set; }

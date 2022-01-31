@@ -9,7 +9,7 @@ namespace Repository.Entities
     {
         public Venda()
         {
-            Vendaproduto = new HashSet<Vendaproduto>();
+            Vendaproduto = new HashSet<VendaProduto>();
         }
 
         [Key]
@@ -20,6 +20,6 @@ namespace Repository.Entities
         public decimal? Total { get; set; }
 
         public virtual Cliente CodclienteNavigation { get; set; }
-        public virtual ICollection<Vendaproduto> Vendaproduto { get; set; }
+        public virtual ICollection<VendaProduto> Vendaproduto { get; set; }
     }
 }
