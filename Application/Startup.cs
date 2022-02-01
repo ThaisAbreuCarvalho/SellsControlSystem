@@ -7,8 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Repository;
 using Repository.Interfaces;
-using SistemaVenda.DAL;
-using SistemaVenda.Helpers;
+using Repository.Utilities;
 
 namespace SistemaVenda
 {
@@ -36,12 +35,14 @@ namespace SistemaVenda
             services.AddScoped<IClienteService, ClienteService>();
             services.AddScoped<IProdutoService, ProdutoService>();
             services.AddScoped<IVendaService, VendaService>();
+            services.AddScoped<IUserService, UserService>();
 
             //repository
             services.AddScoped<ICategoriaRepository, CategoriaRepository>();
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
             services.AddScoped<IVendaRepository, VendaRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IVendaProdutoRepository, VendaProdutoRepository>();
 
             services.AddSession();
