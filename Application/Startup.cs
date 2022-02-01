@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Repository;
+using Repository.Contexto;
 using Repository.Interfaces;
 using Repository.Utilities;
 
@@ -25,8 +26,7 @@ namespace SistemaVenda
         {
             services.AddControllersWithViews();
 
-            services.AddScoped<SistemaVenda.DAL.sistemavendasContext>();
-            services.AddScoped<Repository.Contexto.sistemavendasContext>();
+            services.AddScoped<sistemavendasContext>();
             services.AddScoped<Cryptograph>();
             services.AddHttpContextAccessor();
 
